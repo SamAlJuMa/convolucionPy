@@ -1,0 +1,16 @@
+QMainWindow{
+    background-color: #313335;
+}
+
+QLabel{
+    color: white;
+}
+
+QPushButton {
+
+    background-color: #86888a;
+}
+
+QRadioButton {
+    color: white;
+}
