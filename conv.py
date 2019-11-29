@@ -41,3 +41,27 @@ def makePerConv(sgnPer, sgnFin):
     for i in range(size):
         conv.append(subArray1[i]+subArray2[i])
     return conv
+
+
+def perConv(sgnPer, sgnFin):
+    conv = []
+    result = []
+    sum = 0
+
+    tempArray = makeConv(sgnPer, sgnFin)
+
+    size = len(sgnPer)
+
+    while (len(tempArray) % size) != 0:
+        tempArray.append(0)
+
+    splitIndex = len(tempArray)/size
+    tempArray = np.asarray(tempArray)
+    conv = np.split(tempArray, splitIndex)
+
+    for i in range(size):
+        for j in range(len(conv)):
+            sum = sum+conv[j][i]
+        result.append(sum)
+        sum = 0
+    return(result)

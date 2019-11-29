@@ -1,7 +1,7 @@
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QDialog, QLabel, QPushButton
 from main import Ui_MainWindow
-from conv import makeConv, makePerConv
+from conv import makeConv, perConv
 import numpy as np
 import sys
 import matplotlib.pyplot as plt
@@ -150,6 +150,8 @@ class mywindow(QtWidgets.QMainWindow):
             x = setX(center, convSgn)
 
             self.ui.sgn_3.setText(str(convSgn))
+            self.ui.posCent.setText(str(center))
+            self.ui.ePosCent.setText(str(convSgn[center-1]))
             grafSgn(x, convSgn)
 
     def convPer(self):
@@ -164,7 +166,7 @@ class mywindow(QtWidgets.QMainWindow):
 
         if (sgn1String == "" or sgn2String == "" or center1 == "" or center2 == ""):
             createErrorMessage()
-        elif(self.ui.per2.isChecked() or self.ui.per2.isChecked()):
+        elif(self.ui.per2.isChecked() or self.ui.per1.isChecked()):
             sgn1List = sgn1String.split(",")
             sgn2List = sgn2String.split(",")
 
@@ -187,11 +189,13 @@ class mywindow(QtWidgets.QMainWindow):
                 sgnPer = sgn2List
                 sgnFin = sgn1List
 
-            convSgn = makePerConv(sgnPer, sgnFin)
+            convSgn = perConv(sgnPer, sgnFin)
             center = center+len(convSgn)
             convSgn = convSgn+convSgn+convSgn
             x = setX(center, convSgn)
             self.ui.sgn_3.setText(str(convSgn))
+            self.ui.posCent.setText(str(center))
+            self.ui.ePosCent.setText(str(convSgn[center-1]))
             grafSgn(x, convSgn)
 
     def convCir(self):
@@ -222,13 +226,15 @@ class mywindow(QtWidgets.QMainWindow):
                 sgn2List[i] = float(eval(sgn2List[i]))
 
             if len(sgn1List) >= len(sgn2List):
-                convSgn = makePerConv(sgn1List, sgn2List)
+                convSgn = perConv(sgn1List, sgn2List)
             else:
-                convSgn = makePerConv(sgn2List, sgn1List)
+                convSgn = perConv(sgn2List, sgn1List)
             center = center+len(convSgn)
             convSgn = convSgn+convSgn+convSgn
             x = setX(center, convSgn)
             self.ui.sgn_3.setText(str(convSgn))
+            self.ui.posCent.setText(str(center))
+            self.ui.ePosCent.setText(str(convSgn[center-1]))
             grafSgn(x, convSgn)
 
 
